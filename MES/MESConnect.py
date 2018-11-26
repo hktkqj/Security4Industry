@@ -86,7 +86,6 @@ def deploy(Command):
 def status(Command):
     while '' in Command :
         Command.remove('')
-        Command
     if len(Command) == 1:
         print("Improper argument number.")
         return
@@ -154,10 +153,6 @@ def FunctionCycle():
                 continue
             else :
                 print("Command \"%s\" should have argument(s), please try again." % Command)
-
-
-
-
 
 if __name__ == '__main__':
     ConfigImport()
