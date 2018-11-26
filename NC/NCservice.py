@@ -39,7 +39,7 @@ def configinport():
         config[content[i].split(' ')[0]] = content[i].split(' ')[2]
 
 def status() :
-    return random.choice(["Standby","Working","OutofOrder"])
+    return random.choice(["Stand by","Working","Out of Order"])
 
 def SaveDeployFile(data) :
     DeployLogFileName = time.strftime("%Y-%m-%d %H.%M.%S", time.localtime()) + ".dpl"
@@ -57,12 +57,14 @@ def GoOnline() :
         while True :
             ret_bytes = client.recv(10240)
             Receive = str(ret_bytes,encoding="utf-8")
-            print(Receive)
             if Receive == "request" :
-                sock.sendall(bytes(status(),encoding='utf-8'))
+                client.sendall(bytes(status(),encoding='utf-8'))
+            elif Receive == "end" :
+                client.close()
+                break
             else :
                 SaveDeployFile(Receive)
-                sock.send(bytes("received",encoding='utf-8'))
+                client.send(bytes("received",encoding='utf-8'))
 
 
 if __name__ == '__main__':

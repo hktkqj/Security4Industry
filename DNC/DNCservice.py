@@ -39,6 +39,7 @@ def RequestStatus(Command) :
                 stasock.connect(dev[1])
                 stasock.sendall(bytes("request",encoding="utf-8"))
                 ret = str(stasock.recv(1024), encoding="utf-8")
+                stasock.sendall(bytes("end", encoding="utf-8"))
                 stasock.close()
             except :
                 ret = "Unreachable"
@@ -47,16 +48,17 @@ def RequestStatus(Command) :
         Log("Request status of device " + ",".join(Device))
         for num1 in Device :
             num = int(num1)
-            print(devices[num])
             stasock = socket.socket()
             try:
                 stasock.connect(devices[num])
                 stasock.sendall(bytes("request", encoding="utf-8"))
                 ret = str(stasock.recv(1024), encoding="utf-8")
+                stasock.sendall(bytes("end", encoding="utf-8"))
                 stasock.close()
             except:
                 ret = "Unreachable"
-            print("Device %d status :%s" % (num, ret))
+            SendBack.append("Device %d status :%s" % (num, ret))
+    print(SendBack)
 
 def RequestDeploy(Command) :
     Data = Command.split("~~~")
