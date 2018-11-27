@@ -58,23 +58,48 @@ def RequestStatus(Command) :
             except:
                 ret = "Unreachable"
             SendBack.append("Device %d status :%s" % (num, ret))
-    print(SendBack)
+    return '\n'.join(SendBack)
 
 def RequestDeploy(Command) :
     Data = Command.split("~~~")
     Device = Data[0].split("|||")
     Content = Data[1]
+    SendBack = []
     if Device[0] == "A" :
         Message = "Deploy file to all device. File="
+        for dev in devices.items() :
+            stasock = socket.socket()
+            try :
+                stasock.connect(dev[1])
+                stasock.sendall(bytes(Content,encoding="utf-8"))
+                ret = str(stasock.recv(1024), encoding="utf-8")
+                stasock.sendall(bytes("end", encoding="utf-8"))
+                stasock.close()
+            except :
+                ret = "Unreachable"
+            SendBack.append("Device %d  :%s" % (dev[0],ret))
     else :
         Message = "Deploy file to device " + ",".join(Device) + ". File="
+        for num1 in Device :
+            num = int(num1)
+            stasock = socket.socket()
+            try:
+                stasock.connect(devices[num])
+                stasock.sendall(bytes(Content, encoding="utf-8"))
+                ret = str(stasock.recv(1024), encoding="utf-8")
+                stasock.sendall(bytes("end", encoding="utf-8"))
+                stasock.close()
+            except:
+                ret = "Unreachable"
+            SendBack.append("Device %d status :%s" % (num, ret))
     DeployLogFileName = time.strftime("%Y-%m-%d %H.%M.%S", time.localtime()) + ".dpl"
     DeployLogFile = open(DeployLogFileName,"w")
     DeployLogFile.write(Content)
     DeployLogFile.close()
     AbsPath = os.getcwd() + "\\" + DeployLogFileName
     Log(Message + '"%s"' % AbsPath)
-
+    print(SendBack)
+    return '\n'.join(SendBack)
 
 def StartService():
     sk = socket.socket()
@@ -89,9 +114,9 @@ def StartService():
             if (Receive == "finish") :
                 break
             if (Receive.split(" ")[0] == "status") :
-                RequestStatus(Receive.split(" "))
+                client.send(bytes(RequestStatus(Receive.split(" ")),encoding='utf-8'))
             if (Receive.split(" ")[0] == "deploy") :
-                RequestDeploy(Receive.split(" ")[1])
+                client.send(bytes(RequestDeploy(Receive.split(" ")[1]),encoding='utf-8'))
         client.close()
         Log("Log out from %s" % addr[0])
     sk.close()

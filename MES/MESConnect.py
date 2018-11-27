@@ -82,7 +82,6 @@ def deploy(Command):
         return
 
 
-
 def status(Command):
     while '' in Command :
         Command.remove('')
@@ -115,6 +114,7 @@ def status(Command):
         except :
             print("You are now disconnected from server")
             return
+    return str(tryConnect.recv(10240),encoding="utf-8")
 
 def FunctionCycle():
     function = ["status", "deploy", "help", "exit"]
@@ -138,9 +138,9 @@ def FunctionCycle():
                 print(help[Command[0]])
                 continue
             if Command[0] == "deploy" :
-                deploy(' '.join(Command))
+                print(deploy(' '.join(Command)))
             elif Command[0] == "status" :
-                status(Command)
+                print(status(Command))
         else :
             if Command not in function :
                 print("Command \"%s\" not found, please try again." % Command)
