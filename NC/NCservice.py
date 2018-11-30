@@ -58,13 +58,9 @@ def GoOnline() :
     sock.listen(1)
     while True :
         client, addr = sock.accept()
-        ret_bytes = client.recv(10240)
-        Receive = str(ret_bytes, encoding="utf-8")
-        RSAbase.savekey2file(Receive,"MES.key")
         while True :
-            ret_bytes = client.recv(10240)
+            ret_bytes = client.recv(102400)
             Receive = str(ret_bytes,encoding="utf-8")
-            print(Receive)
             if Receive == "request" :
                 client.sendall(bytes(status(),encoding='utf-8'))
             elif Receive == "end" :
@@ -73,7 +69,9 @@ def GoOnline() :
             elif "~~~" in Receive and "|||" in Receive:
                 SaveDeployFile(Receive)
                 client.send(bytes("Deployed successfully",encoding='utf-8'))
-
+            else :
+                RSAbase.savekey2file(Receive, "MES.key")
+                client.send(bytes("Key accepted", encoding='utf-8'))
 
 if __name__ == '__main__':
     if firstrun() == False :

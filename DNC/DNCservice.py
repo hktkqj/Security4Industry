@@ -106,15 +106,19 @@ def RequestDeploy(Command) :
     return '\n'.join(SendBack)
 
 def sendMESPubkey2NC(byte_key) :
+    show = ""
     for dev in devices.items():
         stasock = socket.socket()
         try:
             stasock.connect(dev[1])
-            print(byte_key)
-            stasock.sendall(byte_key)
+            stasock.send(byte_key)
+            ret = str(stasock.recv(1024), encoding="utf-8")
+            stasock.send(bytes("end",encoding='utf-8'))
             stasock.close()
         except:
-            print("Unreachable")
+            ret = "Unreachable"
+        print(dev[1],end="-")
+        print(ret)
 
 def StartService():
     sk = socket.socket()
@@ -129,7 +133,6 @@ def StartService():
         while True :
             ret_bytes = client.recv(102400)
             Receive = str(ret_bytes,encoding="utf-8")
-            print(Receive)
             if (Receive == "finish") :
                 break
             if (Receive.split(" ")[0] == "status") :
