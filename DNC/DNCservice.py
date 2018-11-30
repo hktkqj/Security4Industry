@@ -106,19 +106,20 @@ def RequestDeploy(Command) :
     return '\n'.join(SendBack)
 
 def sendMESPubkey2NC(byte_key) :
-    show = ""
+    retli = []
+    byte_key = bytes("key:" + str(byte_key,encoding='utf-8') , encoding='utf-8')
     for dev in devices.items():
         stasock = socket.socket()
         try:
             stasock.connect(dev[1])
             stasock.send(byte_key)
             ret = str(stasock.recv(1024), encoding="utf-8")
+            retli.append("(%s,%s)-%s"%(dev[1][0],str(dev[1][1]),ret))
             stasock.send(bytes("end",encoding='utf-8'))
             stasock.close()
         except:
-            ret = "Unreachable"
-        print(dev[1],end="-")
-        print(ret)
+            pass
+    return retli
 
 def StartService():
     sk = socket.socket()
@@ -129,7 +130,7 @@ def StartService():
         Log("Log in from %s" % addr[0])
         ret_bytes = client.recv(102400)
         RSAbase.savekey2file(str(ret_bytes,encoding="utf-8"),"MES.key")
-        sendMESPubkey2NC(ret_bytes)
+        client.send(bytes('&'.join(sendMESPubkey2NC(ret_bytes)),encoding='utf-8'))
         while True :
             ret_bytes = client.recv(102400)
             Receive = str(ret_bytes,encoding="utf-8")

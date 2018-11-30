@@ -23,6 +23,12 @@ def Connect2Server():
         tryConnect.connect((config['target'],int(config['port'])))
         print("Connect to server %s (port %s) successfully" % (config['target'],config['port']))
         tryConnect.send(RSAbase.encode_pubkey(pubkey))
+        keys = str(tryConnect.recv(102400),encoding='utf-8').split('&')
+        for key in keys:
+            key = key.split('-')
+            print(key)
+            dev = key[0]
+            RSAbase.savekey2file(key[1], dev+'.key')
         return True
     except :
         print("Unable reach server %s (port %s)" % (config['target'],config['port']))
@@ -81,6 +87,7 @@ def deploy(Command):
     sendmsg = "deploy " + device + "~~~" + Content
     try:
         tryConnect.sendall(sendmsg.encode('utf-8'))
+        return str(tryConnect.recv(102400),encoding='utf-8')
     except:
         print("You are now disconnected from server")
         return

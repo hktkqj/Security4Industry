@@ -66,12 +66,12 @@ def GoOnline() :
             elif Receive == "end" :
                 client.close()
                 break
-            elif "~~~" in Receive and "|||" in Receive:
+            elif Receive.split(':')[0] == "key" :
+                RSAbase.savekey2file(Receive[4:], "MES.key")
+                client.send(RSAbase.encode_pubkey(pubkey))
+            else :
                 SaveDeployFile(Receive)
                 client.send(bytes("Deployed successfully",encoding='utf-8'))
-            else :
-                RSAbase.savekey2file(Receive, "MES.key")
-                client.send(bytes("Key accepted", encoding='utf-8'))
 
 if __name__ == '__main__':
     if firstrun() == False :

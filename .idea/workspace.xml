@@ -3,12 +3,22 @@
   <component name="ChangeListManager">
     <list default="true" id="63b1a634-0a3b-43d4-abda-a0ef00c78650" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DNC/2018-11-27 23.44.18.dpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DNC/2018-11-27 23.46.18.dpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DNC/2018-11-28 14.10.32.dpl" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/DNC/DNCservice.py" beforeDir="false" afterPath="$PROJECT_DIR$/DNC/DNCservice.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DNC/MES.key" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DNC/MES.key" beforeDir="false" afterPath="$PROJECT_DIR$/DNC/MES.key" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DNC/Record.log" beforeDir="false" afterPath="$PROJECT_DIR$/DNC/Record.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NC/MES.key" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MES/MESConnect.py" beforeDir="false" afterPath="$PROJECT_DIR$/MES/MESConnect.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NC/2018-11-27 23.44.17.dpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NC/2018-11-27 23.46.17.dpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NC/2018-11-28 14.10.32.dpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NC/MES.key" beforeDir="false" afterPath="$PROJECT_DIR$/NC/MES.key" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NC/NCservice.py" beforeDir="false" afterPath="$PROJECT_DIR$/NC/NCservice.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NC1/MES.key" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NC1/2018-11-27 23.44.17.dpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NC1/2018-11-27 23.46.17.dpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NC1/2018-11-28 14.10.32.dpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NC1/NCservice.py" beforeDir="false" afterPath="$PROJECT_DIR$/NC1/NCservice.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,11 +28,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/NC/NCservice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="584">
-              <caret line="73" column="50" selection-start-line="73" selection-start-column="50" selection-end-line="73" selection-end-column="50" />
+            <state relative-caret-position="375">
+              <caret line="62" column="53" selection-start-line="62" selection-start-column="53" selection-end-line="62" selection-end-column="53" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -33,8 +43,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DNC/DNCservice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="107" column="22" selection-start-line="107" selection-start-column="22" selection-end-line="107" selection-end-column="22" />
+            <state relative-caret-position="546">
+              <caret line="141" column="16" selection-start-line="141" selection-start-column="16" selection-end-line="141" selection-end-column="89" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -43,13 +53,31 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/NC/RSAbase.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="13" column="26" lean-forward="true" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MES/MESConnect.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="114" column="32" lean-forward="true" selection-start-line="114" selection-start-column="32" selection-end-line="114" selection-end-column="32" />
+            <state relative-caret-position="451">
+              <caret line="157" column="24" lean-forward="true" selection-start-line="157" selection-start-column="24" selection-end-line="157" selection-end-column="24" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/NC1/NCservice.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="532">
+              <caret line="34" column="19" lean-forward="true" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -81,14 +109,14 @@
         <option value="$PROJECT_DIR$/NC/RSAbase.py" />
         <option value="$PROJECT_DIR$/MES/RSAbase.py" />
         <option value="$PROJECT_DIR$/DNC/RSAbase.py" />
-        <option value="$PROJECT_DIR$/MES/MESConnect.py" />
         <option value="$PROJECT_DIR$/Encry-Decry/RSAbase.py" />
         <option value="$PROJECT_DIR$/DNC/DNCservice.py" />
+        <option value="$PROJECT_DIR$/MES/MESConnect.py" />
         <option value="$PROJECT_DIR$/NC/NCservice.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="582" />
     <option name="y" value="-16" />
     <option name="width" value="974" />
@@ -257,7 +285,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="RSAbase" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="RSAbase (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Security4Industry" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -265,11 +293,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Encry-Decry" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/NC" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Encry-Decry/RSAbase.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NC/RSAbase.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -283,15 +311,15 @@
       <item itemvalue="Python.DNCservice" />
       <item itemvalue="Python.NCservice" />
       <item itemvalue="Python.NCservice (1)" />
-      <item itemvalue="Python.RSAbase" />
+      <item itemvalue="Python.RSAbase (1)" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.MESConnect" />
         <item itemvalue="Python.DNCservice" />
         <item itemvalue="Python.NCservice" />
+        <item itemvalue="Python.RSAbase (1)" />
         <item itemvalue="Python.NCservice (1)" />
-        <item itemvalue="Python.RSAbase" />
       </list>
     </recent_temporary>
   </component>
@@ -331,12 +359,12 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13540569" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13540569" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.329718" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49947312" weight="0.28091106" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49947312" visible="true" weight="0.28091106" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -398,13 +426,6 @@
             <caret line="13" column="55" lean-forward="true" selection-start-line="13" selection-start-column="55" selection-end-line="13" selection-end-column="55" />
           </first_editor>
           <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DNC/Record.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
         </state>
       </provider>
     </entry>
@@ -486,13 +507,6 @@
     <entry file="file://$PROJECT_DIR$/DNC/MES.key">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/NC1/NCservice.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="26" column="16" selection-start-line="26" selection-start-column="16" selection-end-line="27" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/NC/MES.key">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
@@ -500,17 +514,50 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/MES/(127.0.0.1,20001).key">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="5" lean-forward="true" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DNC/Record.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-629">
+          <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NC/2018-11-30 22.12.05.dpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NC/2018-11-30 22.12.15.dpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DNC/2018-11-30 22.15.38.dpl">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/NC/RSAbase.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="33" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
+        <state relative-caret-position="247">
+          <caret line="13" column="26" lean-forward="true" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NC/NCservice.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="62" column="53" selection-start-line="62" selection-start-column="53" selection-end-line="62" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DNC/DNCservice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="107" column="22" selection-start-line="107" selection-start-column="22" selection-end-line="107" selection-end-column="22" />
+        <state relative-caret-position="546">
+          <caret line="141" column="16" selection-start-line="141" selection-start-column="16" selection-end-line="141" selection-end-column="89" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
@@ -519,21 +566,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MES/MESConnect.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="114" column="32" lean-forward="true" selection-start-line="114" selection-start-column="32" selection-end-line="114" selection-end-column="32" />
+        <state relative-caret-position="451">
+          <caret line="157" column="24" lean-forward="true" selection-start-line="157" selection-start-column="24" selection-end-line="157" selection-end-column="24" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/NC/NCservice.py">
+    <entry file="file://$PROJECT_DIR$/NC1/NCservice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="584">
-          <caret line="73" column="50" selection-start-line="73" selection-start-column="50" selection-end-line="73" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="532">
+          <caret line="34" column="19" lean-forward="true" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
         </state>
       </provider>
     </entry>
