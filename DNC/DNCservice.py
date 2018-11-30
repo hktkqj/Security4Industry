@@ -1,8 +1,13 @@
 import socket
 import os
 import time
+import threading
+import rsa
+import RSAbase
+
 config = {}
 devices = {}
+pubkey, privkey = rsa.newkeys(1024)
 
 def configinport():
     cfgfile = open("DNC.cfg")
@@ -98,8 +103,18 @@ def RequestDeploy(Command) :
     DeployLogFile.close()
     AbsPath = os.getcwd() + "\\" + DeployLogFileName
     Log(Message + '"%s"' % AbsPath)
-    print(SendBack)
     return '\n'.join(SendBack)
+
+def sendMESPubkey2NC(byte_key) :
+    for dev in devices.items():
+        stasock = socket.socket()
+        try:
+            stasock.connect(dev[1])
+            print(byte_key)
+            stasock.sendall(byte_key)
+            stasock.close()
+        except:
+            print("Unreachable")
 
 def StartService():
     sk = socket.socket()
@@ -108,9 +123,13 @@ def StartService():
     while True :
         client, addr = sk.accept()
         Log("Log in from %s" % addr[0])
+        ret_bytes = client.recv(102400)
+        RSAbase.savekey2file(str(ret_bytes,encoding="utf-8"),"MES.key")
+        sendMESPubkey2NC(ret_bytes)
         while True :
-            ret_bytes = client.recv(10240)
+            ret_bytes = client.recv(102400)
             Receive = str(ret_bytes,encoding="utf-8")
+            print(Receive)
             if (Receive == "finish") :
                 break
             if (Receive.split(" ")[0] == "status") :

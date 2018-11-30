@@ -1,9 +1,12 @@
 import socket
 import time
 import os
+import rsa
+import RSAbase
 
 config = {}
 ConnectFlag = False
+pubkey, privkey = rsa.newkeys(1024)
 
 tryConnect = socket.socket()
 
@@ -19,6 +22,7 @@ def Connect2Server():
     try :
         tryConnect.connect((config['target'],int(config['port'])))
         print("Connect to server %s (port %s) successfully" % (config['target'],config['port']))
+        tryConnect.send(RSAbase.encode_pubkey(pubkey))
         return True
     except :
         print("Unable reach server %s (port %s)" % (config['target'],config['port']))

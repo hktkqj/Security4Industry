@@ -3,6 +3,10 @@ import os
 import uuid
 import random
 import time
+import rsa
+import RSAbase
+
+pubkey, privkey = rsa.newkeys(1024)
 
 def firstrun() :
     return os.path.exists("LocalConfig.cfg")
@@ -54,15 +58,19 @@ def GoOnline() :
     sock.listen(1)
     while True :
         client, addr = sock.accept()
+        ret_bytes = client.recv(10240)
+        Receive = str(ret_bytes, encoding="utf-8")
+        RSAbase.savekey2file(Receive,"MES.key")
         while True :
             ret_bytes = client.recv(10240)
             Receive = str(ret_bytes,encoding="utf-8")
+            print(Receive)
             if Receive == "request" :
                 client.sendall(bytes(status(),encoding='utf-8'))
             elif Receive == "end" :
                 client.close()
                 break
-            else:
+            elif "~~~" in Receive and "|||" in Receive:
                 SaveDeployFile(Receive)
                 client.send(bytes("Deployed successfully",encoding='utf-8'))
 
