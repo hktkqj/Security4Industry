@@ -1,7 +1,6 @@
 import socket
 import os
 import time
-import threading
 import rsa
 import RSAbase
 
@@ -9,6 +8,8 @@ config = {}
 devices = {}
 pubkey, privkey = rsa.newkeys(1024)
 
+#启动时从DNC.cfg中导入配置，包括ip/MAC/port
+#同时从Devices.cfg中导入设备信息，包括各设备的端口号和ip
 def configinport():
     cfgfile = open("DNC.cfg")
     content = cfgfile.read().split('\n')
@@ -24,12 +25,14 @@ def configinport():
         detail = dev.split(',')
         devices[int(detail[0])] = (detail[1].split('=')[1],int(detail[2].split('=')[1]))
 
+#用于记录保存日志信息
 def Log(msg) :
     LogFile = open("Record.log","a")
     msg = time.asctime( time.localtime(time.time()) ) + " | " + msg + '\n'
     LogFile.write(msg)
     LogFile.close()
 
+#响应询问状态信息
 def RequestStatus(Command) :
     if "A" in Command :
         Device = ["A"]
@@ -58,6 +61,7 @@ def RequestStatus(Command) :
                 stasock.connect(devices[num])
                 stasock.sendall(bytes("request", encoding="utf-8"))
                 ret = str(stasock.recv(1024), encoding="utf-8")
+                print(ret)
                 stasock.sendall(bytes("end", encoding="utf-8"))
                 stasock.close()
             except:
@@ -65,6 +69,7 @@ def RequestStatus(Command) :
             SendBack.append("Device %d status :%s" % (num, ret))
     return '\n'.join(SendBack)
 
+#响应部署信息
 def RequestDeploy(Command) :
     Data = Command.split("~~~")
     Device = Data[0].split("|||")
@@ -105,6 +110,7 @@ def RequestDeploy(Command) :
     Log(Message + '"%s"' % AbsPath)
     return '\n'.join(SendBack)
 
+#用来将密钥文件下发至NC设备
 def sendMESPubkey2NC(byte_key) :
     retli = []
     byte_key = bytes("key:" + str(byte_key,encoding='utf-8') , encoding='utf-8')
@@ -121,19 +127,25 @@ def sendMESPubkey2NC(byte_key) :
             pass
     return retli
 
+#主服务程序，用来接收MES发送来的信息
 def StartService():
+    #端口绑定
     sk = socket.socket()
     sk.bind((config["host"],int(config["port"])))
     sk.listen(1)
     while True :
         client, addr = sk.accept()
+        #记录登陆信息
         Log("Log in from %s" % addr[0])
+        #每次连接后更新MES公钥文件
         ret_bytes = client.recv(102400)
         RSAbase.savekey2file(str(ret_bytes,encoding="utf-8"),"MES.key")
+        #同时将接收到的密钥下发到NC设备
         client.send(bytes('&'.join(sendMESPubkey2NC(ret_bytes)),encoding='utf-8'))
         while True :
             ret_bytes = client.recv(102400)
             Receive = str(ret_bytes,encoding="utf-8")
+            #根据MES的不同请求来控制NC设备
             if (Receive == "finish") :
                 break
             if (Receive.split(" ")[0] == "status") :
@@ -145,7 +157,9 @@ def StartService():
     sk.close()
 
 if __name__ == '__main__':
+    #导入配置
     configinport()
+    #开始服务
     StartService()
 
 

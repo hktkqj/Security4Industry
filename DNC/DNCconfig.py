@@ -32,7 +32,7 @@ def write2config():
     print("Config save successfully.")
 
 
-
+#可用来间接配置DNC.cfg信息
 if __name__ == '__main__':
     configinport()
     configoutput()
