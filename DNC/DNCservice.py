@@ -19,11 +19,11 @@ def configinport():
     cfgfile = open("Devices.cfg","r")
     content = cfgfile.read().split('\n')
     cfgfile.close()
-    while '' in content :
+    while '' in content:
         content.remove('')
-    for dev in content :
+    for dev in content:
         detail = dev.split(',')
-        devices[int(detail[0])] = (detail[1].split('=')[1],int(detail[2].split('=')[1]))
+        devices[int(detail[0])] = (detail[1].split('=')[1], int(detail[2].split('=')[1]))
 
 #用于记录保存日志信息
 def Log(msg) :
@@ -45,9 +45,9 @@ def RequestStatus(Command) :
             stasock = socket.socket()
             try :
                 stasock.connect(dev[1])
-                stasock.sendall(bytes("request",encoding="utf-8"))
-                ret = str(stasock.recv(1024), encoding="utf-8")
-                stasock.sendall(bytes("end", encoding="utf-8"))
+                stasock.sendall(RSAbase.rsa_encry("request", RSAbase.readkeybyfile("(%s,%s).key" % (dev[1][0],dev[1][1]))))
+                ret = RSAbase.rsa_decry(stasock.recv(10240), privkey)
+                stasock.sendall(RSAbase.rsa_encry("end", RSAbase.readkeybyfile("(%s,%s).key" % (dev[1][0],dev[1][1]))))
                 stasock.close()
             except :
                 ret = "Unreachable"
@@ -59,10 +59,9 @@ def RequestStatus(Command) :
             stasock = socket.socket()
             try:
                 stasock.connect(devices[num])
-                stasock.sendall(bytes("request", encoding="utf-8"))
-                ret = str(stasock.recv(1024), encoding="utf-8")
-                print(ret)
-                stasock.sendall(bytes("end", encoding="utf-8"))
+                stasock.sendall(RSAbase.rsa_encry("request", RSAbase.readkeybyfile("(%s,%s).key" % (devices[num][0], devices[num][1]))))
+                ret = RSAbase.rsa_decry(stasock.recv(10240), privkey)
+                stasock.sendall(RSAbase.rsa_encry("end", RSAbase.readkeybyfile("(%s,%s).key" % (devices[num][0], devices[num][1]))))
                 stasock.close()
             except:
                 ret = "Unreachable"
@@ -81,9 +80,9 @@ def RequestDeploy(Command) :
             stasock = socket.socket()
             try :
                 stasock.connect(dev[1])
-                stasock.sendall(bytes(Content,encoding="utf-8"))
-                ret = str(stasock.recv(1024), encoding="utf-8")
-                stasock.sendall(bytes("end", encoding="utf-8"))
+                stasock.sendall(RSAbase.rsa_encry(Content, RSAbase.readkeybyfile("(%s,%s).key" % (dev[1][0],dev[1][1]))))
+                ret = RSAbase.rsa_decry(stasock.recv(10240), privkey)
+                stasock.sendall(RSAbase.rsa_encry("end", RSAbase.readkeybyfile("(%s,%s).key" % (dev[1][0],dev[1][1]))))
                 stasock.close()
             except :
                 ret = "Unreachable"
@@ -95,9 +94,9 @@ def RequestDeploy(Command) :
             stasock = socket.socket()
             try:
                 stasock.connect(devices[num])
-                stasock.sendall(bytes(Content, encoding="utf-8"))
-                ret = str(stasock.recv(1024), encoding="utf-8")
-                stasock.sendall(bytes("end", encoding="utf-8"))
+                stasock.sendall(RSAbase.rsa_encry(Content, RSAbase.readkeybyfile("(%s,%s).key" % (devices[num][0], devices[num][1]))))
+                ret = RSAbase.rsa_decry(stasock.recv(10240), privkey)
+                stasock.sendall(RSAbase.rsa_encry("end", RSAbase.readkeybyfile("(%s,%s).key" % (devices[num][0], devices[num][1]))))
                 stasock.close()
             except:
                 ret = "Unreachable"
@@ -110,22 +109,19 @@ def RequestDeploy(Command) :
     Log(Message + '"%s"' % AbsPath)
     return '\n'.join(SendBack)
 
+
 #用来将密钥文件下发至NC设备
-def sendMESPubkey2NC(byte_key) :
-    retli = []
-    byte_key = bytes("key:" + str(byte_key,encoding='utf-8') , encoding='utf-8')
+def ExchangePubkeyNC(local_pubkey):
     for dev in devices.items():
         stasock = socket.socket()
         try:
             stasock.connect(dev[1])
-            stasock.send(byte_key)
-            ret = str(stasock.recv(1024), encoding="utf-8")
-            retli.append("(%s,%s)-%s"%(dev[1][0],str(dev[1][1]),ret))
-            stasock.send(bytes("end",encoding='utf-8'))
+            stasock.sendall(RSAbase.encode_pubkey(local_pubkey))
+            RSAbase.savekey2file(str(stasock.recv(10240), encoding="utf-8"), "(%s,%s).key" % (dev[1][0],str(dev[1][1])))
+            stasock.sendall(RSAbase.rsa_encry("end", RSAbase.readkeybyfile("(%s,%s).key" % (dev[1][0],dev[1][1]))))
             stasock.close()
         except:
             pass
-    return retli
 
 #主服务程序，用来接收MES发送来的信息
 def StartService():
@@ -140,18 +136,24 @@ def StartService():
         #每次连接后更新MES公钥文件
         ret_bytes = client.recv(102400)
         RSAbase.savekey2file(str(ret_bytes,encoding="utf-8"),"MES.key")
-        #同时将接收到的密钥下发到NC设备
-        client.send(bytes('&'.join(sendMESPubkey2NC(ret_bytes)),encoding='utf-8'))
+        #回传DNC公钥
+        client.sendall(RSAbase.encode_pubkey(pubkey))
+        #同时与NC设备交换公钥
+        ExchangePubkeyNC(pubkey)
         while True :
             ret_bytes = client.recv(102400)
-            Receive = str(ret_bytes,encoding="utf-8")
+            try :
+                Receive = RSAbase.rsa_decry(ret_bytes,privkey)
+            except :
+                #Log("Illegal request.")
+                continue
             #根据MES的不同请求来控制NC设备
             if (Receive == "finish") :
                 break
             if (Receive.split(" ")[0] == "status") :
-                client.send(bytes(RequestStatus(Receive.split(" ")),encoding='utf-8'))
+                client.sendall(RSAbase.rsa_encry(RequestStatus(Receive.split(" ")), RSAbase.readkeybyfile("MES.key")))
             if (Receive.split(" ")[0] == "deploy") :
-                client.send(bytes(RequestDeploy(Receive.split(" ")[1]),encoding='utf-8'))
+                client.sendall(RSAbase.rsa_encry(RequestDeploy(Receive.split(" ")[1]), RSAbase.readkeybyfile("MES.key")))
         client.close()
         Log("Log out from %s" % addr[0])
     sk.close()

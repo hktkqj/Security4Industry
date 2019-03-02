@@ -6,7 +6,7 @@ def rsa_encry(d_str,key_in) :
     return rsa.encrypt(content,key_in)
 
 #Input: bytes, (A private key class) Return: decoded string
-def res_decry(d_byte,key_in) :
+def rsa_decry(d_byte,key_in) :
     result = rsa.decrypt(d_byte,key_in)
     return result.decode('utf-8')
 

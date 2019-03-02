@@ -23,11 +23,7 @@ def Connect2Server():
         tryConnect.connect((config['target'],int(config['port'])))
         print("Connect to server %s (port %s) successfully" % (config['target'],config['port']))
         tryConnect.send(RSAbase.encode_pubkey(pubkey))
-        keys = str(tryConnect.recv(102400),encoding='utf-8').split('&')
-        for key in keys:
-            key = key.split('-')
-            dev = key[0]
-            RSAbase.savekey2file(key[1], dev+'.key')
+        RSAbase.savekey2file(str(tryConnect.recv(102400),encoding='utf-8'),"DNC.key")
         return True
     except :
         print("Unable reach server %s (port %s)" % (config['target'],config['port']))
@@ -94,8 +90,12 @@ def deploy(Command):
     sendmsg = "deploy " + device + "~~~" + Content
     try:
         #发送文件
-        tryConnect.sendall(sendmsg.encode('utf-8'))
-        return str(tryConnect.recv(102400),encoding='utf-8')
+        tryConnect.sendall(RSAbase.rsa_encry(sendmsg, RSAbase.readkeybyfile("DNC.key")))
+        try:
+            ret_info = RSAbase.rsa_decry(tryConnect.recv(102400), privkey)
+        except:
+            ret_info = "Illegal content detected!"
+        return ret_info
     except:
         print("You are now disconnected from server")
         return
@@ -114,7 +114,7 @@ def status(Command):
     if 'A' in Command :
         sendmsg = "status A"
         try:
-            tryConnect.sendall(sendmsg.encode('utf-8'))
+            tryConnect.sendall(RSAbase.rsa_encry(sendmsg,RSAbase.readkeybyfile("DNC.key")))
         except:
             print("You are now disconnected from server")
             return
@@ -133,12 +133,16 @@ def status(Command):
         for item in Command :
             sendmsg = sendmsg + item  + " "
         try :
-            tryConnect.sendall(sendmsg[0:-1].encode('utf-8'))
+            tryConnect.sendall(RSAbase.rsa_encry(sendmsg[0:-1],RSAbase.readkeybyfile("DNC.key")))
         except :
             print("You are now disconnected from server")
             return
     #接受返回信息
-    return str(tryConnect.recv(10240),encoding="utf-8")
+    try :
+        ret_info = str(RSAbase.rsa_decry(tryConnect.recv(102400),privkey))
+    except :
+        ret_info = "Illegal content detected!"
+    return ret_info
 
 #提供了一个命令行界面
 def FunctionCycle():
@@ -171,7 +175,9 @@ def FunctionCycle():
                 print(help[Command[0]])
                 continue
             if Command[0] == "deploy" :
-                print(deploy(' '.join(Command)))
+                pr = deploy(' '.join(Command))
+                if pr != None :
+                    print(pr)
             elif Command[0] == "status" :
                 print(status(Command))
         else :
