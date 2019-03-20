@@ -2,22 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63b1a634-0a3b-43d4-abda-a0ef00c78650" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Sign&amp;Verify/DNC.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sign&amp;Verify/MES.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sign&amp;Verify/NC.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Sign&amp;Verify/signtest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Timetest/Encry&amp;Decry_time.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Timetest/Genarate_Time.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Timetest/RSAbase.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Timetest/Report.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DNC/DNCservice.py" beforeDir="false" afterPath="$PROJECT_DIR$/DNC/DNCservice.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DNC/MES.key" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DNC/RSAbase.py" beforeDir="false" afterPath="$PROJECT_DIR$/DNC/RSAbase.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DNC/Record.log" beforeDir="false" afterPath="$PROJECT_DIR$/DNC/Record.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Encry-Decry/RSAbase.py" beforeDir="false" afterPath="$PROJECT_DIR$/Encry-Decry/RSAbase.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MES/(127.0.0.1,20001).key" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MES/MESConnect.py" beforeDir="false" afterPath="$PROJECT_DIR$/MES/MESConnect.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MES/RSAbase.py" beforeDir="false" afterPath="$PROJECT_DIR$/MES/RSAbase.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MES/a.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NC/2018-11-30 22.27.10.dpl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NC/2018-11-30 22.28.41.dpl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NC/MES.key" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NC/NCservice.py" beforeDir="false" afterPath="$PROJECT_DIR$/NC/NCservice.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NC/RSAbase.py" beforeDir="false" afterPath="$PROJECT_DIR$/NC/RSAbase.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NC1/RSAbase.py" beforeDir="false" afterPath="$PROJECT_DIR$/NC1/RSAbase.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,44 +24,51 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/DNC/DNCservice.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="99" column="31" lean-forward="true" selection-start-line="99" selection-start-column="31" selection-end-line="99" selection-end-column="31" />
+            <state relative-caret-position="2565">
+              <caret line="139" column="44" selection-start-line="139" selection-start-column="31" selection-end-line="139" selection-end-column="44" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Timetest/RSAbase.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="399">
+              <caret line="27" column="24" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/MES/MESConnect.py">
+        <entry file="file://$PROJECT_DIR$/Timetest/Encry&amp;Decry_time.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="424">
-              <caret line="153" column="11" lean-forward="true" selection-start-line="153" selection-start-column="11" selection-end-line="153" selection-end-column="11" />
+            <state relative-caret-position="367">
+              <caret line="52" column="4" lean-forward="true" selection-start-line="52" selection-start-column="4" selection-end-line="52" selection-end-column="4" />
               <folding>
-                <element signature="e#0#13#0" expanded="true" />
+                <element signature="e#0#10#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/NC/NCservice.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="80" column="24" lean-forward="true" selection-start-line="80" selection-start-column="24" selection-end-line="80" selection-end-column="24" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
+        <entry file="file://$PROJECT_DIR$/Timetest/Report.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor />
+              <second_editor />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MES/RSAbase.py">
+        <entry file="file://$PROJECT_DIR$/Sign&amp;Verify/signtest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="23" column="45" lean-forward="true" selection-start-line="23" selection-start-column="45" selection-end-line="23" selection-end-column="45" />
+            <state relative-caret-position="57">
+              <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -105,7 +106,6 @@
         <option value="$PROJECT_DIR$/MES/readme.md" />
         <option value="$PROJECT_DIR$/DNC/readme.md" />
         <option value="$PROJECT_DIR$/MES/MES.cfg" />
-        <option value="$PROJECT_DIR$/Encry-Decry/RSAbase.py" />
         <option value="$PROJECT_DIR$/DNC/RSAbase.py" />
         <option value="$PROJECT_DIR$/MES/RSAbase.py" />
         <option value="$PROJECT_DIR$/NC/RSAbase.py" />
@@ -113,14 +113,26 @@
         <option value="$PROJECT_DIR$/MES/MESConnect.py" />
         <option value="$PROJECT_DIR$/DNC/DNCservice.py" />
         <option value="$PROJECT_DIR$/NC/NCservice.py" />
+        <option value="$PROJECT_DIR$/Sign&amp;Verify/signtest.py" />
+        <option value="$PROJECT_DIR$/Sign&amp;Verify/MES.py" />
+        <option value="$PROJECT_DIR$/Sign&amp;Verify/DNC.py" />
+        <option value="$PROJECT_DIR$/Sign&amp;Verify/NC.py" />
+        <option value="$PROJECT_DIR$/str.py" />
+        <option value="$PROJECT_DIR$/timetest.py" />
+        <option value="$PROJECT_DIR$/Timetest/Report.py" />
+        <option value="$PROJECT_DIR$/Timetest/Report.md" />
+        <option value="$PROJECT_DIR$/Timetest/Encry&amp;Decry.py" />
+        <option value="$PROJECT_DIR$/Encry-Decry/RSAbase.py" />
+        <option value="$PROJECT_DIR$/Timetest/RSAbase.py" />
+        <option value="$PROJECT_DIR$/Timetest/Encry&amp;Decry_time.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="554" />
-    <option name="y" value="-25" />
-    <option name="width" value="974" />
-    <option name="height" value="1047" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="1448" />
+    <option name="y" value="106" />
+    <option name="width" value="1204" />
+    <option name="height" value="1048" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -130,48 +142,38 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="Security4Industry" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Security4Industry" type="462c0819:PsiDirectoryNode" />
+              <item name="Security4Industry_New_Version" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Security4Industry_New_Version" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Security4Industry" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Security4Industry" type="462c0819:PsiDirectoryNode" />
+              <item name="Security4Industry_New_Version" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Security4Industry_New_Version" type="462c0819:PsiDirectoryNode" />
               <item name="DNC" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Security4Industry" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Security4Industry" type="462c0819:PsiDirectoryNode" />
+              <item name="Security4Industry_New_Version" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Security4Industry_New_Version" type="462c0819:PsiDirectoryNode" />
               <item name="Documents" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Security4Industry" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Security4Industry" type="462c0819:PsiDirectoryNode" />
+              <item name="Security4Industry_New_Version" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Security4Industry_New_Version" type="462c0819:PsiDirectoryNode" />
               <item name="Encry-Decry" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Security4Industry" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Security4Industry" type="462c0819:PsiDirectoryNode" />
-              <item name="MES" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Security4Industry" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Security4Industry" type="462c0819:PsiDirectoryNode" />
-              <item name="NC" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Security4Industry" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Security4Industry" type="462c0819:PsiDirectoryNode" />
-              <item name="NC1" type="462c0819:PsiDirectoryNode" />
+              <item name="Security4Industry_New_Version" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Security4Industry_New_Version" type="462c0819:PsiDirectoryNode" />
+              <item name="Timetest" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -180,12 +182,15 @@
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Python" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\hktkqj\Documents\GitHub\Security4Industry_New_Version\Timetest" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\hktkqj\Documents\GitHub\Security4Industry_New_Version\Timetest" />
       <recent name="C:\Users\hktkqj\Documents\GitHub\Security4Industry\NC1" />
       <recent name="C:\Users\hktkqj\Documents\GitHub\Security4Industry\NC" />
       <recent name="C:\Users\hktkqj\Documents\GitHub\Security4Industry\MES" />
       <recent name="C:\Users\hktkqj\Documents\GitHub\Security4Industry\DNC" />
-      <recent name="C:\Users\hktkqj\Documents\GitHub\Security4Industry" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -200,8 +205,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.MESConnect">
-    <configuration name="DNCservice" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.Encry&amp;Decry_time">
+    <configuration name="Encry&amp;Decry" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Security4Industry" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -209,11 +214,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DNC" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Timetest" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DNC/DNCservice.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\hktkqj\Documents\GitHub\Security4Industry_New_Version\Timetest\Encry&amp;Decry_time.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -222,7 +227,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="MESConnect" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="Encry&amp;Decry_time" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Security4Industry" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -230,11 +235,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/MES" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Timetest" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MES/MESConnect.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Timetest/Encry&amp;Decry_time.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -243,7 +248,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="NCservice" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="RSAbase (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Security4Industry" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -251,32 +256,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/NC" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Timetest" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/NC/NCservice.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="RSAbase (2)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Security4Industry" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/MES" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MES/RSAbase.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Timetest/RSAbase.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -293,11 +277,32 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DNC" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Encry-Decry" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DNC/RSAbase.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Encry-Decry/RSAbase.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="timetest" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Security4Industry" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="C:\Users\hktkqj\Documents\GitHub\Security4Industry_New_Version\Timetest\Genarate_Time.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -307,19 +312,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.MESConnect" />
-      <item itemvalue="Python.DNCservice" />
-      <item itemvalue="Python.NCservice" />
+      <item itemvalue="Python.timetest" />
+      <item itemvalue="Python.Encry&amp;Decry" />
       <item itemvalue="Python.RSAbase" />
-      <item itemvalue="Python.RSAbase (2)" />
+      <item itemvalue="Python.Encry&amp;Decry_time" />
+      <item itemvalue="Python.RSAbase (1)" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.MESConnect" />
-        <item itemvalue="Python.DNCservice" />
-        <item itemvalue="Python.NCservice" />
-        <item itemvalue="Python.RSAbase (2)" />
+        <item itemvalue="Python.Encry&amp;Decry_time" />
+        <item itemvalue="Python.RSAbase (1)" />
         <item itemvalue="Python.RSAbase" />
+        <item itemvalue="Python.Encry&amp;Decry" />
+        <item itemvalue="Python.timetest" />
       </list>
     </recent_temporary>
   </component>
@@ -337,15 +342,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-6" y="-6" width="1381" height="885" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13435195" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1330855" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.329718" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49947312" weight="0.3177874" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49947312" visible="true" weight="0.2453581" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -382,19 +387,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.cfg" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/NC/LocalConfig" />
-    <entry file="file://$PROJECT_DIR$/NC/2018-11-26 23.32.11.dpl" />
-    <entry file="file://$PROJECT_DIR$/NC/LocalConfig.cfg">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NC/2018-11-27 09.54.22.dpl" />
-    <entry file="file://$PROJECT_DIR$/NC/2018-11-27 09.55.17.dpl" />
-    <entry file="file://$PROJECT_DIR$/NC/2018-11-27 09.55.33.dpl" />
-    <entry file="file://$PROJECT_DIR$/NC1/2018-11-27 09.55.17.dpl" />
     <entry file="file://$PROJECT_DIR$/NC1/2018-11-27 09.54.22.dpl" />
     <entry file="file://$PROJECT_DIR$/NC1/LocalConfig.cfg">
       <provider selected="true" editor-type-id="text-editor">
@@ -423,20 +415,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/NC/2018-11-30 22.27.10.dpl" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/rsa/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="703">
-          <caret line="39" column="67" selection-start-line="39" selection-start-column="67" selection-end-line="39" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/rsa/key.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3268">
-          <caret line="180" selection-start-line="180" selection-end-line="180" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/DNC/DNCconfig.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="646">
@@ -504,16 +482,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="247">
-            <caret line="13" column="55" lean-forward="true" selection-start-line="13" selection-start-column="55" selection-end-line="13" selection-end-column="55" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Encry-Decry/readme.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -524,13 +492,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DNC/MES.key">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="42" lean-forward="true" selection-start-column="42" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/DNC/MES.key" />
     <entry file="file://$PROJECT_DIR$/DNC/Devices.cfg">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
@@ -552,37 +514,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Encry-Decry/RSAbase.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DNC/RSAbase.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="14" column="27" lean-forward="true" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NC/2019-03-02 17.17.53.dpl">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MES/RSAbase.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="23" column="45" lean-forward="true" selection-start-line="23" selection-start-column="45" selection-end-line="23" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/rsa/pkcs1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="232" column="42" selection-start-line="232" selection-start-column="36" selection-end-line="232" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/NC/2019-03-02 17.17.53.dpl" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/rsa/transform.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="371">
@@ -590,35 +522,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DNC/2019-03-02 18.04.13.dpl">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DNC/2019-03-02 17.17.53.dpl">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DNC/2019-03-02 17.58.21.dpl">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DNC/2019-03-02 18.02.21.dpl">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DNC/2019-03-02 18.09.43.dpl">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/NC/NCservice.py">
+    <entry file="file://$PROJECT_DIR$/DNC/2019-03-02 18.04.13.dpl" />
+    <entry file="file://$PROJECT_DIR$/DNC/2019-03-02 17.17.53.dpl" />
+    <entry file="file://$PROJECT_DIR$/DNC/2019-03-02 17.58.21.dpl" />
+    <entry file="file://$PROJECT_DIR$/DNC/2019-03-02 18.02.21.dpl" />
+    <entry file="file://$PROJECT_DIR$/DNC/2019-03-02 18.09.43.dpl" />
+    <entry file="file://$PROJECT_DIR$/MES/RSAbase.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="80" column="24" lean-forward="true" selection-start-line="80" selection-start-column="24" selection-end-line="80" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="437">
+          <caret line="23" column="45" selection-start-line="23" selection-start-column="45" selection-end-line="23" selection-end-column="45" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DNC/DNCservice.py">
+    <entry file="file://$PROJECT_DIR$/NC/NCservice.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="99" column="31" lean-forward="true" selection-start-line="99" selection-start-column="31" selection-end-line="99" selection-end-column="31" />
+        <state relative-caret-position="831">
+          <caret line="80" column="24" selection-start-line="80" selection-start-column="24" selection-end-line="80" selection-end-column="24" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
@@ -627,10 +546,143 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MES/MESConnect.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="153" column="11" lean-forward="true" selection-start-line="153" selection-start-column="11" selection-end-line="153" selection-end-column="11" />
+        <state relative-caret-position="2769">
+          <caret line="148" column="4" selection-start-line="148" selection-start-column="4" selection-end-line="148" selection-end-column="4" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="247">
+            <caret line="13" column="55" lean-forward="true" selection-start-line="13" selection-start-column="55" selection-end-line="13" selection-end-column="55" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/str.py" />
+    <entry file="file://$PROJECT_DIR$/Sign&amp;Verify/DNC.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="35" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Sign&amp;Verify/NC.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="35" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Sign&amp;Verify/MES.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="35" lean-forward="true" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Timetest/Genarate_Time.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/rsa/pkcs1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="705">
+          <caret line="79" column="16" selection-start-line="79" selection-start-column="16" selection-end-line="79" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DNC/RSAbase.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DNC/DNCservice.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2565">
+          <caret line="139" column="44" selection-start-line="139" selection-start-column="31" selection-end-line="139" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Timetest/Report.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="34" column="44" lean-forward="true" selection-start-line="34" selection-start-column="44" selection-end-line="34" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Sign&amp;Verify/signtest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/rsa/key.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="254" column="6" lean-forward="true" selection-start-line="254" selection-start-column="6" selection-end-line="254" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/site-packages/rsa/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="39" column="69" selection-start-line="39" selection-start-column="69" selection-end-line="39" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Encry-Decry/RSAbase.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="28" column="18" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Timetest/RSAbase.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="27" column="24" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Timetest/Encry&amp;Decry_time.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="367">
+          <caret line="52" column="4" lean-forward="true" selection-start-line="52" selection-start-column="4" selection-end-line="52" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>

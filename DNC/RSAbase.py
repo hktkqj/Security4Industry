@@ -1,14 +1,35 @@
 import rsa
+# This RSAbsae file is made for 1024-bits RSA encryption
+# 1024-bit info:
+#   len(str) >= 100 : divide blocks
 
-#Input: string, (A public key class) Return: encoded('utf-8') bytes
+
+# Input: string, (A public key class) Return: encoded('utf-8') bytes
+# Update: Divide blocks for long string
 def rsa_encry(d_str,key_in) :
-    content = d_str.encode('utf-8')
-    return rsa.encrypt(content,key_in)
+    if len(d_str) > 100 :
+        out = b""
+        for i in range(0,len(d_str),100) :
+            if i+100 >= len(d_str) :
+                out = out + rsa_encry(d_str[i:], key_in)
+            else :
+                out = out + rsa_encry(d_str[i:i+10], key_in)
+        return out
+    else :
+        content = d_str.encode('utf-8')
+        return rsa.encrypt(content,key_in)
 
 #Input: bytes, (A private key class) Return: decoded string
+#Update: Support long string encryption
 def rsa_decry(d_byte,key_in) :
-    result = rsa.decrypt(d_byte,key_in)
-    return result.decode('utf-8')
+    if len(d_byte) > 128 :
+        out = ""
+        for i in range(0,len(d_byte),128) :
+            out = out + rsa.decrypt(d_byte[i:i+128], key_in).decode('utf8')
+        return out
+    else :
+        result = rsa.decrypt(d_byte,key_in)
+        return result.decode('utf8')
 
 #PublicKey(n, e),
 #PrivateKey(n, e, d, p, q)
