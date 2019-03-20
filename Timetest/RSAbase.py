@@ -6,14 +6,14 @@ import rsa
 
 # Input: string, (A public key class) Return: encoded('utf-8') bytes
 # Update: Divide blocks for long string
-def rsa_encry(d_str,key_in) :
-    if len(d_str) > 100 :
+def rsa_encry(d_str,key_in,key_len) :
+    if len(d_str) > (key_len//8)-12 :
         out = b""
-        for i in range(0,len(d_str),100) :
-            if i+100 >= len(d_str) :
-                out = out + rsa_encry(d_str[i:], key_in)
+        for i in range(0,len(d_str),key_len//8-12) :
+            if i+key_len//8-12 >= len(d_str) :
+                out = out + rsa.encrypt(d_str[i:].encode('utf8'), key_in)
             else :
-                out = out + rsa_encry(d_str[i:i+100], key_in)
+                out = out + rsa.encrypt(d_str[i:i+key_len//8-12].encode('utf8'), key_in)
         return out
     else :
         content = d_str.encode('utf-8')
@@ -21,11 +21,11 @@ def rsa_encry(d_str,key_in) :
 
 #Input: bytes, (A private key class) Return: decoded string
 #Update: Support long string encryption
-def rsa_decry(d_byte,key_in) :
-    if len(d_byte) > 128 :
+def rsa_decry(d_byte,key_in,key_len) :
+    if len(d_byte) > key_len//8 :
         out = ""
-        for i in range(0,len(d_byte),128) :
-            out = out + rsa.decrypt(d_byte[i:i+128], key_in).decode('utf8')
+        for i in range(0,len(d_byte),key_len//8) :
+            out = out + rsa.decrypt(d_byte[i:i+key_len//8], key_in).decode('utf8')
         return out
     else :
         result = rsa.decrypt(d_byte,key_in)
