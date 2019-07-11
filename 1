@@ -2,8 +2,28 @@
 #include<bitset>
 #include<cstdio>
 #include<algorithm>
+#include<fstream>
+#define indent 8
+#define perttify
 using namespace std;
 bitset<48> subkey[16];
+char buffer[65536];
+
+char hex_map[16] = {
+    '0', '1', '2', '3', '4', '5', '6', '7',
+    '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
+};
+
+int rev_hex_map[128];
+inline init_hex_map(){
+    for (auto i='0'; i<='9'; i++)
+        rev_hex_map[int(i)] = int(i) - int('0');
+    for (auto i='A'; i<='F'; i++)
+        rev_hex_map[int(i)] = int(i) - int('A') + 10;
+    for (auto i='a'; i<='f'; i++)
+        rev_hex_map[int(i)] = int(i) - int('a') + 10;
+}
+
 int PC_1[56] = {
     57, 49, 41, 33, 25, 17,  9,
     1,  58, 50, 42, 34, 26, 18,
@@ -14,6 +34,7 @@ int PC_1[56] = {
     14,  6, 61, 53, 45, 37, 29,
     21, 13,  5, 28, 20, 12,  4
 };
+
 int PC_2[48] = {
     14, 17, 11, 24,  1,  5,
      3, 28, 15,  6, 21, 10,
@@ -24,9 +45,15 @@ int PC_2[48] = {
     44, 49, 39, 56, 34, 53,
     46, 42, 50, 36, 29, 32
 };
-int key_shift[16] = {
+
+int key_encry_shift[16] = {
     1, 1, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 1
 };
+
+int key_decry_shift[16] = {
+    0, 1, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 1
+};
+
 int IP[64] = {
     58, 50, 42, 34, 26, 18, 10,  2,
     60, 52, 44, 36, 28, 20, 12,  4,
@@ -36,6 +63,91 @@ int IP[64] = {
     59, 51, 43, 35, 27, 19, 11,  3,
     61, 53, 45, 37, 29, 21, 13,  5,
     63, 55, 47, 39, 31, 23, 15,  7
+};
+
+int IP_1[64] = {
+    40,  8, 48, 16, 56, 24, 64, 32,
+    39,  7, 47, 15, 55, 23, 63, 31,
+    38,  6, 46, 14, 54, 22, 62, 30,
+    37,  5, 45, 13, 53, 21, 61, 29,
+    36,  4, 44, 12, 52, 20, 60, 28,
+    35,  3, 43, 11, 51, 19, 59, 27,
+    34,  2, 42, 10, 50, 18, 58, 26,
+    33,  1, 41,  9, 49, 17, 57, 25
+};
+
+int E[48] = {
+    32,  1,  2,  3,  4,  5,
+     4,  5,  6,  7,  8,  9,
+     8,  9, 10, 11, 12, 13,
+    12, 13, 14, 15, 16, 17,
+    16, 17, 18, 19, 20, 21,
+    20, 21, 22, 23, 24, 25,
+    24, 25, 26, 27, 28, 29,
+    28, 29, 30, 31, 32,  1
+};
+
+int S[8][4][16] =
+{
+    {
+        {14,  4, 13,  1,  2, 15, 11,  8,  3, 10,  6, 12,  5,  9,  0,  7},
+        { 0, 15,  7,  4, 14,  2, 13,  1, 10,  6, 12, 11,  9,  5,  3,  8},
+        { 4,  1, 14,  8, 13,  6,  2, 11, 15, 12,  9,  7,  3, 10,  5,  0},
+        {15, 12,  8,  2,  4,  9,  1,  7,  5, 11,  3, 14, 10,  0,  6, 13}
+    },
+    {
+        {15,  1,  8, 14,  6, 11,  3,  4,  9,  7,  2, 13, 12,  0,  5, 10},
+        { 3, 13,  4,  7, 15,  2,  8, 14, 12,  0,  1, 10,  6,  9, 11,  5},
+        { 0, 14,  7, 11, 10,  4, 13,  1,  5,  8, 12,  6,  9,  3,  2, 15},
+        {13,  8, 10,  1,  3, 15,  4,  2, 11,  6,  7, 12,  0,  5, 14,  9}
+    },
+    {
+        {10,  0,  9, 14,  6,  3, 15,  5,  1, 13, 12,  7, 11,  4,  2,  8},
+        {13,  7,  0,  9,  3,  4,  6, 10,  2,  8,  5, 14, 12, 11, 15,  1},
+        {13,  6,  4,  9,  8, 15,  3,  0, 11,  1,  2, 12,  5, 10, 14,  7},
+        { 1, 10, 13,  0,  6,  9,  8,  7,  4, 15, 14,  3, 11,  5,  2, 12}
+    },
+    {
+        { 7, 13, 14,  3,  0,  6,  9, 10,  1,  2,  8,  5, 11, 12,  4, 15},
+        {13,  8, 11,  5,  6, 15,  0,  3,  4,  7,  2, 12,  1, 10, 14,  9},
+        {10,  6,  9,  0, 12, 11,  7, 13, 15,  1,  3, 14,  5,  2,  8,  4},
+        { 3, 15,  0,  6, 10,  1, 13,  8,  9,  4,  5, 11, 12,  7,  2, 14}
+    },
+    {
+        { 2, 12,  4,  1,  7, 10, 11,  6,  8,  5,  3, 15, 13,  0, 14,  9},
+        {14, 11,  2, 12,  4,  7, 13,  1,  5,  0, 15, 10,  3,  9,  8,  6},
+        { 4,  2,  1, 11, 10, 13,  7,  8, 15,  9, 12,  5,  6,  3,  0, 14},
+        {11,  8, 12,  7,  1, 14,  2, 13,  6, 15,  0,  9, 10,  4,  5,  3}
+    },
+    {
+        {12,  1, 10, 15,  9,  2,  6,  8,  0, 13,  3,  4, 14,  7,  5, 11},
+        {10, 15,  4,  2,  7, 12,  9,  5,  6,  1, 13, 14,  0, 11,  3,  8},
+        { 9, 14, 15,  5,  2,  8, 12,  3,  7,  0,  4, 10,  1, 13, 11,  6},
+        { 4,  3,  2, 12,  9,  5, 15, 10, 11, 14,  1,  7,  6,  0,  8, 13}
+    },
+    {
+        { 4, 11,  2, 14, 15,  0,  8, 13,  3, 12,  9,  7,  5, 10,  6,  1},
+        {13,  0, 11,  7,  4,  9,  1, 10, 14,  3,  5, 12,  2, 15,  8,  6},
+        { 1,  4, 11, 13, 12,  3,  7, 14, 10, 15,  6,  8,  0,  5,  9,  2},
+        { 6, 11, 13,  8,  1,  4, 10,  7,  9,  5,  0, 15, 14,  2,  3, 12}
+    },
+    {
+        {13,  2,  8,  4,  6, 15, 11,  1, 10,  9,  3, 14,  5,  0, 12,  7},
+        { 1, 15, 13,  8, 10,  3,  7,  4, 12,  5,  6, 11,  0, 14,  9,  2},
+        { 7, 11,  4,  1,  9, 12, 14,  2,  0,  6, 10, 13, 15,  3,  5,  8},
+        { 2,  1, 14,  7,  4, 10,  8, 13, 15, 12,  9,  0,  3,  5,  6, 11}
+    }
+};
+
+int P[32] ={
+    16,  7, 20, 21,
+    29, 12, 28, 17,
+     1, 15, 23, 26,
+     5, 18, 31, 10,
+     2,  8, 24, 14,
+    32, 27,  3,  9,
+    19, 13, 30,  6,
+    22, 11,  4, 25
 };
 
 template<std::size_t N>
@@ -50,6 +162,7 @@ void reverse(std::bitset<N> &b) {
 template<std::size_t N>
 void output(std::bitset<N> &b) {
     for (auto i=0;i<N;++i)
+        //cout<<((i % 4==0 && i != 0) ? " " : "")<<b[i];
         cout<<b[i];
     cout<<endl;
 }
@@ -64,21 +177,37 @@ void lrt(std::bitset<N>& b, unsigned m) {
     b = b >> m | b << (N-m);
 }
 
-void generate_sub_key(bitset<64> key){
+template<std::size_t N>
+std::string to_hex(std::bitset<N>&b) {
+    std::string hex_string = "";
+    int init = 0;
+    while (init + 4 <= b.size()) {
+        int num = b[init] * 8 + b[init + 1] * 4 + \
+                  b[init + 2] * 2 + b[init + 3] * 1;
+        hex_string += hex_map[num];
+        init += 4;
+    }
+    return hex_string;
+}
+
+void generate_sub_key(bitset<64> key, bool mode){
     // Initialize transform
     bitset<56> it_key;
     for (auto i=0;i<56;++i)
         it_key[i] = key[PC_1[i] - 1]; //Note
-    output(it_key);
     bitset<28> c; bitset<28> d;
     for (auto bit=0; bit<28; ++bit){
         c[bit] = it_key[bit];
         d[bit] = it_key[bit + 28];
     }
-    output(c);
     for (auto i=0; i<16; ++i){
-        lrt(c, key_shift[i]); lrt(d, key_shift[i]);
-        output(c);
+        if (mode) {
+            lrt(c, key_encry_shift[i]);
+            lrt(d, key_encry_shift[i]);
+        } else {
+            rrt(c, key_decry_shift[i]);
+            rrt(d, key_decry_shift[i]);
+        }
         for (auto bit=0; bit<48; ++bit)
             subkey[i][bit] = PC_2[bit] > 28 ? \
                     d[PC_2[bit] - 29] : c[PC_2[bit] - 1];
@@ -92,20 +221,494 @@ void generate_sub_key(bitset<64> key){
     */
 }
 
-void block_encry(bitset<64> raw){
+bitset<48> extend(bitset<32> R){
+    bitset<48> Ext;
+    for (auto i=0; i<48; ++i)
+        Ext[i] = R[E[i] - 1];
+    return Ext;
+}
+
+bitset<32> f(bitset<32> R, bitset<48> key) {
+    bitset<48> new_R;
+    new_R = extend(R);
+    new_R = new_R ^ key;
+    bitset <6> part[8];
+    for (auto i=0; i<48; ++i)
+        part[i / 6][i % 6] = new_R[i];
+    bitset<32> total;
+    for (auto i=0; i<8; ++i){
+        int line = part[i][0] * 2 + part[i][5] * 1;
+        int row  = part[i][1] * 8 + part[i][2] * 4 \
+                 + part[i][3] * 2 + part[i][4] * 1;
+        bitset<32> _temp_result(S[i][line][row]);
+        total <<= 4;
+        total = total | _temp_result;
+    }
+    reverse(total);
+    bitset<32> ret;
+    for (auto i=0; i<32; ++i)
+        ret[i] = total[P[i] - 1];
+    return ret;
+}
+
+bitset<64> single_block(bitset<64> raw, bitset<64> key, bool mode){
+    generate_sub_key(key, mode);
     bitset<64> baked;
     for (auto i=0; i<64; ++i)
         baked[i] = raw[IP[i] - 1];
-    output(baked);
+    bitset<32> L0; bitset<32> R0;
+    for (auto i=0; i<32; ++i){
+        L0[i] = baked[i];
+        R0[i] = baked[i + 32];
+    }
+    for (auto i=0; i<16; ++i){
+        bitset<32> temp;
+        temp = L0;
+        L0 = R0;
+        R0 = temp ^ f(L0, subkey[i]);
+    }
+    bitset<64> result;
+    for (auto i=0; i<64; ++i)
+        result[i] = IP_1[i] > 32 ? \
+                L0[IP_1[i] - 33] : R0[IP_1[i] - 1];
+    return result;
 }
 
+inline bool check_hex(string hex_text){
+    for (auto i=0; i<hex_text.length(); ++i)
+        if (!((hex_text[i]>='0' && hex_text[i]<='9') || \
+            (hex_text[i]>='A' && hex_text[i]<='F') || \
+            (hex_text[i]>='a' && hex_text[i]<='f')))
+                return false;
+    return true;
+}
+
+inline bool check_bin(string bin_text){
+    for (auto i=0; i<bin_text.length(); ++i)
+        if (bin_text[i] != '0' && bin_text[i] != '1')
+            return false;
+    return true;
+}
+
+string block_cipher(string input_plain_mode, string plain, \
+                  string input_key_mode, string key, \
+                  string input_IV_mode, string IV, \
+                  string output_mode, string block_cipher_mode, \
+                  bool mode)
+{
+    bitset<64> plain_bit[65536]; // Max plain length = 64 * 65536 bit = 512 KB
+    int plain_block_num = 0; int fill_bit;
+    if (input_plain_mode == "hex" || input_plain_mode == "HEX") {
+        if (plain[0] == '0' && (plain[1] == 'x' || plain[1] == 'X'))
+            plain = plain.substr(2);
+        fill_bit = 4 * ((16 - plain.length() % 16) % 16);
+        plain_block_num = plain.length() / 16 + !(plain.length() % 16 == 0);
+        if (check_hex(plain)) {
+            // e.g.: 0xABCDEF1023456789 01
+            for (auto i=0; i<plain.length(); ++i) {
+                bitset <64> _temp_number(rev_hex_map[plain[i]]);
+                plain_bit[i / 16] <<=4;
+                plain_bit[i / 16] = plain_bit[i / 16] | _temp_number;
+                if (i % 16 == 0 && i != 0)
+                    reverse(plain_bit[i / 16 - 1]);
+            }
+            if (plain.length() % 16 != 0)
+                plain_bit[plain_block_num - 1] <<= (16 - (plain.length() % 16)) * 4;
+            reverse(plain_bit[plain_block_num - 1]);
+        } else {
+            cout<<"Invaild hex text input!(Bad char)"<<endl;
+            return "";
+        }
+    } else if (input_plain_mode == "bin" || input_plain_mode == "BIN") {
+        if (plain[0] == '0' && (plain[1] == 'b' || plain[1] == 'B'))
+            plain = plain.substr(2);
+        fill_bit = (64 - plain.length() % 64) % 64;
+        if (check_bin(plain)) {
+            plain_block_num = plain.length() / 64 + !(plain.length() % 64 == 0);
+            // e.g.: 10101010101010101000001010000001111111
+            for (auto i=0; i<plain.length(); ++i)
+                plain_bit[i / 64][i % 64] = (plain[i] == '1') ? 1 : 0;
+        } else {
+            cout<<"Invaild bin text input!(Bad char)"<<endl;
+            return "";
+        }
+    } else if (input_plain_mode == "plain" || input_plain_mode == "PLAIN") {
+        string hex_type = "";
+        fill_bit = 8 * ((8 - plain.length() % 8) % 8);
+        for (auto i=0; i<plain.length(); ++i){
+            unsigned char num = (unsigned char)(plain[i]);
+            int high = num >> 4, low = num % 16;
+            hex_type = hex_type + hex_map[high] + hex_map[low];
+        }
+        plain_block_num = hex_type.length() / 16 + !(hex_type.length() % 16 == 0);
+        for (auto i=0; i<hex_type.length(); ++i) {
+            bitset <64> _temp_number(rev_hex_map[hex_type[i]]);
+            plain_bit[i / 16] <<=4;
+            plain_bit[i / 16] = plain_bit[i / 16] | _temp_number;
+            if (i % 16 == 0 && i != 0)
+                reverse(plain_bit[i / 16 - 1]);
+        }
+        if (hex_type.length() % 16 != 0)
+            plain_bit[plain_block_num - 1] <<= (16 - (hex_type.length() % 16)) * 4;
+        reverse(plain_bit[plain_block_num - 1]);
+    } else if (input_plain_mode == "file" || input_plain_mode == "FILE") {
+        ifstream input_file(plain, ios::in | ios::binary);
+        input_file.read(buffer, 65535);
+        input_file.close();
+        int read_bytes=input_file.gcount();
+        fill_bit = 8 * ((8 - read_bytes % 8) % 8);
+        string FILE_INPUT = "";
+        for (int i=0; i<read_bytes; ++i)
+            FILE_INPUT = FILE_INPUT + buffer[i];
+        string hex_type = "";
+        for (auto i=0; i<FILE_INPUT.length(); ++i){
+            unsigned char num = (unsigned char)(FILE_INPUT[i]);
+            int high = num >> 4, low = num % 16;
+            hex_type = hex_type + hex_map[high] + hex_map[low];
+        }
+        plain_block_num = hex_type.length() / 16 + !(hex_type.length() % 16 == 0);
+        for (auto i=0; i<hex_type.length(); ++i) {
+            bitset <64> _temp_number(rev_hex_map[hex_type[i]]);
+            plain_bit[i / 16] <<=4;
+            plain_bit[i / 16] = plain_bit[i / 16] | _temp_number;
+            if (i % 16 == 0 && i != 0)
+                reverse(plain_bit[i / 16 - 1]);
+        }
+        if (hex_type.length() % 16 != 0)
+            plain_bit[plain_block_num - 1] <<= (16 - (hex_type.length() % 16)) * 4;
+        reverse(plain_bit[plain_block_num - 1]);
+    } else {
+        cout<<"Unrecognized input mode(Must be one of HEX/BIN/PLAIN)!"<<endl;
+        return "";
+    }
+
+    if (mode) {
+        plain_block_num++;
+        bitset <64> _temp_fill(fill_bit);
+        plain_bit[plain_block_num - 1] = _temp_fill;
+    }
+
+    bitset<64> key_bit; // Must be 64 bits!
+    if (input_key_mode == "hex" || input_key_mode == "HEX") {
+        if (key[0] == '0' && (key[1] == 'x' || key[1] == 'X'))
+            key = key.substr(2);
+        if (key.length() == 16 && check_hex(key)) {
+            for (auto i=0; i<key.length(); ++i) {
+                bitset <64> _temp_number(rev_hex_map[key[i]]);
+                key_bit <<=4;
+                key_bit = key_bit | _temp_number;
+            }
+            reverse(key_bit);
+        }  else {
+            cout<<"Invaild HEX key input!(Bad length or Bad char)"<<endl;
+            return "";
+        }
+    } else if (input_key_mode == "bin" || input_key_mode == "BIN") {
+        if (key[0] == '0' && (key[1] == 'x' || key[1] == 'X'))
+            key = key.substr(2);
+        if (key.length()==64 && check_bin(key)) {
+            for (auto i=0; i<key.length(); ++i)
+                key_bit[i] = (key[i] == '1') ? 1 : 0;
+        }  else {
+            cout<<"Invaild BIN key input!(Bad length or Bad char)"<<endl;
+            return "";
+        }
+    } else if (input_key_mode == "plain" || input_key_mode == "PLAIN") {
+        string hex_type = "";
+        for (auto i=0; i<key.length(); ++i){
+            unsigned char num = (unsigned char)(key[i]);
+            int high = num / 16, low = num % 16;
+            hex_type = hex_type + hex_map[high] + hex_map[low];
+        }
+        if (hex_type.length() == 16) {
+            for (auto i=0; i<hex_type.length(); ++i) {
+                bitset <64> _temp_number(rev_hex_map[hex_type[i]]);
+                key_bit <<=4;
+                key_bit = key_bit | _temp_number;
+            }
+            reverse(key_bit);
+        } else {
+            cout<<"Invaild PLAIN key input!(Bad length)"<<endl;
+            return "";
+        }
+    } else {
+        cout<<"Unrecognized input mode(Must be one of HEX/BIN/PLAIN)!"<<endl;
+        return "";
+    }
+
+    bitset<64> IV_bit; // Must be 64 bits!
+    if (block_cipher_mode == "CFB" || block_cipher_mode == "CBC" || \
+    block_cipher_mode == "OFB" || block_cipher_mode == "CTR") {
+        if (input_IV_mode == "hex" || input_IV_mode == "HEX") {
+            if (IV[0] == '0' && (IV[1] == 'x' || IV[1] == 'X'))
+                IV = IV.substr(2);
+            if (IV.length() == 16 && check_hex(IV)) {
+                for (auto i=0; i<IV.length(); ++i) {
+                    bitset <64> _temp_number(rev_hex_map[IV[i]]);
+                    IV_bit <<=4;
+                    IV_bit = IV_bit | _temp_number;
+                }
+                reverse(IV_bit);
+            } else {
+                cout<<"Invaild HEX IV input!(Bad length or Bad char)"<<endl;
+                return "";
+            }
+        } else if (input_IV_mode == "bin" || input_IV_mode == "BIN") {
+            if (IV[0] == '0' && (IV[1] == 'x' || IV[1] == 'X'))
+                IV = IV.substr(2);
+            if (IV.length()==64 && check_bin(IV)) {
+                for (auto i=0; i<IV.length(); ++i)
+                    IV_bit[i] = (IV[i] == '1') ? 1 : 0;
+            } else {
+                cout<<"Invaild BIN IV input!(Bad length or Bad char)"<<endl;
+                return "";
+            }
+        } else if (input_IV_mode == "plain" || input_IV_mode == "PLAIN") {
+            string hex_type = "";
+            for (auto i=0; i<IV.length(); ++i){
+                unsigned char num = (unsigned char)(IV[i]);
+                int high = num / 16, low = num % 16;
+                hex_type = hex_type + hex_map[high] + hex_map[low];
+            }
+            if (hex_type.length() == 16) {
+                for (auto i=0; i<hex_type.length(); ++i) {
+                    bitset <64> _temp_number(rev_hex_map[hex_type[i]]);
+                    IV_bit <<=4;
+                    IV_bit = IV_bit | _temp_number;
+                }
+                reverse(IV_bit);
+            } else {
+                cout<<"Invaild PLAIN IV input!(Bad length)"<<endl;
+                return "";
+            }
+        }  else {
+            cout<<"Unrecognized input mode(Must be one of HEX/BIN/PLAIN)!"<<endl;
+            return "";
+        }
+    }
+
+    bitset<64> cipher[65536]; // Stands for result of calculation
+    if (block_cipher_mode == "ECB") {
+        for (auto i=0; i<plain_block_num; ++i)
+            cipher[i] = single_block(plain_bit[i], key_bit, mode);
+    } else if (block_cipher_mode == "CBC") {
+        if (mode) {
+            plain_bit[0] = plain_bit[0] ^ IV_bit;
+            cipher[0] = single_block(plain_bit[0], key_bit, mode);
+            for (auto i=1; i<plain_block_num; ++i)
+                cipher[i] = single_block(plain_bit[i] ^ cipher[i - 1], key_bit, mode);
+        } else {
+            cipher[0] = single_block(plain_bit[0], key_bit, mode) ^ IV_bit;
+            for (auto i=1; i<plain_block_num; ++i)
+                cipher[i] = single_block(plain_bit[i], key_bit, mode) ^ plain_bit[i - 1];
+        }
+    } else if (block_cipher_mode == "CFB") {
+        cipher[0] = single_block(IV_bit, key_bit, 1) ^ plain_bit[0];
+        for (auto i=1; i<plain_block_num; ++i)
+            cipher[i] = single_block((mode)? cipher[i - 1]:plain_bit[i-1], key_bit, 1) \
+                        ^ plain_bit[i];
+    } else if (block_cipher_mode == "OFB") {
+        bitset<64> _temp_bits = single_block(IV_bit, key_bit, 1);
+        cipher[0] = _temp_bits ^ plain_bit[0];
+        for (auto i=1; i<plain_block_num; ++i) {
+            _temp_bits = single_block(_temp_bits, key_bit, 1);
+            cipher[i] = _temp_bits ^ plain_bit[i];
+        }
+    } else if (block_cipher_mode == "CTR") {
+        for (auto i=0; i<plain_block_num; ++i) {
+            bitset<64> now(i);
+            cipher[i] = single_block(IV_bit ^ now, key_bit, 1) ^ plain_bit[i];
+        }
+    } else {
+        cout<<"Unsupport method(ECB/CBC/CFB/OFB/CTR) !"<<endl;
+        return "";
+    }
+
+    if (!mode) {
+        plain_block_num--;
+        fill_bit = cipher[plain_block_num].to_ulong();
+    }
+
+    if (output_mode == "bin" || output_mode == "BIN") {
+        string BIN_DUMP = "0b";
+        for (auto i=0; i<plain_block_num; ++i) {
+            #ifdef prettify
+            cout<<"Block "<<i<<": ";
+            #endif // prettify
+            if (i == plain_block_num - 1 && !mode) {
+                for (auto j=0; j<64 - fill_bit; ++j) {
+                    #ifdef prettify
+                    cout<<((j % indent==0 && j != 0) ? " " : "")<<cipher[i][j];
+                    #endif // prettify
+                    BIN_DUMP = BIN_DUMP + ((cipher[i][j]) ? '1' : '0');
+                }
+            } else {
+                for (auto j=0; j<64; ++j) {
+                    #ifdef prettify
+                    cout<<((j % indent==0 && j != 0) ? " " : "")<<cipher[i][j];
+                    #endif // prettify
+                    BIN_DUMP = BIN_DUMP + ((cipher[i][j]) ? '1' : '0');
+                }
+            }
+            #ifdef prettify
+            cout<<endl;
+            #endif // prettify
+        }
+        #ifdef prettify
+        cout<<endl;
+        #endif // prettify
+        return BIN_DUMP;
+    } else if (output_mode == "hex" || output_mode == "HEX") {
+        #ifdef prettify
+        cout<<"0x";
+        #endif // prettify
+        string HEX_DUMP = "0x";
+        for (auto i=0; i<plain_block_num; ++i) {
+            string hex_output = "";
+            if (i == plain_block_num - 1 && !mode) {
+                for (auto j=0; j<(64 - fill_bit); j+=4){
+                    int num = cipher[i][j] * 8 + cipher[i][j + 1] * 4 + \
+                              cipher[i][j + 2] * 2 + cipher[i][j + 3];
+                    hex_output = hex_output + hex_map[num];
+                }
+            } else {
+                for (auto j=0; j<64; j+=4){
+                    int num = cipher[i][j] * 8 + cipher[i][j + 1] * 4 + \
+                              cipher[i][j + 2] * 2 + cipher[i][j + 3];
+                    hex_output = hex_output + hex_map[num];
+                }
+            }
+            #ifdef prettify
+            for (auto j=0; j<hex_output.length(); ++j)
+                cout<<((j % indent==0 && j != 0) ? " " : "")<<hex_output[j];
+            cout<<" ";
+            #endif // prettify
+            HEX_DUMP = HEX_DUMP + hex_output;
+        }
+        #ifdef prettify
+        cout<<endl;
+        #endif // prettify
+        return HEX_DUMP;
+    } else if (output_mode == "plain" || output_mode == "PLAIN") {
+        string PLAIN_DUMP;
+        for (auto i=0; i<plain_block_num; ++i) {
+            string plain_output = "";
+            if (i == plain_block_num -1 && !mode) {
+                for (auto j=0; j<(64 - fill_bit); j+=8) {
+                    int num = cipher[i][j] * 128 + cipher[i][j + 1] * 64 + \
+                              cipher[i][j + 2] * 32 + cipher[i][j + 3] * 16 + \
+                              cipher[i][j + 4] * 8 + cipher[i][j + 5] * 4 + \
+                              cipher[i][j + 6] * 2 + cipher[i][j + 7] * 1;
+                    plain_output = plain_output + char(num);
+                }
+            } else {
+                for (auto j=0; j<64; j+=8) {
+                    int num = cipher[i][j] * 128 + cipher[i][j + 1] * 64 + \
+                              cipher[i][j + 2] * 32 + cipher[i][j + 3] * 16 + \
+                              cipher[i][j + 4] * 8 + cipher[i][j + 5] * 4 + \
+                              cipher[i][j + 6] * 2 + cipher[i][j + 7] * 1;
+                    plain_output = plain_output + char(num);
+                }
+            }
+            #ifdef prettify
+            cout<<plain_output;
+            #endif // prettify
+            PLAIN_DUMP = PLAIN_DUMP + plain_output;
+        }
+        #ifdef prettify
+        cout<<endl;
+        #endif // prettify
+        return PLAIN_DUMP;
+    } else if (output_mode == "file" || output_mode == "FILE") {
+        string FILE_DUMP;
+        for (auto i=0; i<plain_block_num; ++i) {
+            string file_output = "";
+            if (i == plain_block_num - 1 && !mode){
+                for (auto j=0; j<(64 - fill_bit); j+=8) {
+                    int num = cipher[i][j] * 128 + cipher[i][j + 1] * 64 + \
+                              cipher[i][j + 2] * 32 + cipher[i][j + 3] * 16 + \
+                              cipher[i][j + 4] * 8 + cipher[i][j + 5] * 4 + \
+                              cipher[i][j + 6] * 2 + cipher[i][j + 7] * 1;
+                    file_output = file_output + char(num);
+                }
+            } else {
+                for (auto j=0; j<64; j+=8) {
+                    int num = cipher[i][j] * 128 + cipher[i][j + 1] * 64 + \
+                              cipher[i][j + 2] * 32 + cipher[i][j + 3] * 16 + \
+                              cipher[i][j + 4] * 8 + cipher[i][j + 5] * 4 + \
+                              cipher[i][j + 6] * 2 + cipher[i][j + 7] * 1;
+                    file_output = file_output + char(num);
+                }
+            }
+            FILE_DUMP = FILE_DUMP + file_output;
+        }
+        for (int i=0; i<FILE_DUMP.length(); i++)
+            buffer[i] = FILE_DUMP[i];
+        printf("Please enter dump file name:");
+        string file_name; cin>>file_name;
+        ofstream output_file(file_name, ios::out | ios::binary);
+        if (mode)
+            output_file.write(buffer, plain_block_num * 8);
+        else
+            output_file.write(buffer, plain_block_num * 8 - fill_bit / 8);
+        return FILE_DUMP;
+    }
+}
 
 
 int main()
 {
-    string key = "0001001100110100010101110111100110011011101111001101111111110001";
-    std::reverse(s.begin(), s.end());
-    bitset<64> raw_input(s);
-    generate_sub_key(raw_input);
+    init_hex_map();
+    /* string block_cipher(input_plain_mode, plain, input_key_mode, key, input_iv_mode, IV,
+                           output_mode, block_cipher_mode, mode)
+    // CASE INSENSITIVE
+    input_plain_mode(string): hex / bin / plain / file
+    plain(string):
+        file : filename
+        mode == 1 : plain text
+        mode == 0 : cipher text
+        MAX_DATA_LIMIT : 512 KB
+
+    input_key_mode(string): hex / bin / plain
+    key(string):
+        Encrypt(mode ==1) / Decrypt(mode == 0) key && It's the same for DES :)
+        Data : Exact 64 bits
+
+    input_iv_mode(string): hex / bin / plain
+    iv(string):
+        Encrypt(mode ==1) / Decrypt(mode == 0) IV && It's the same for DES :)
+        Data : Exact 64 bits
+
+    output_mode(string):
+        hex / bin / plain
+        file : request dump filename
+    block_cipher_mode(string):
+        ECB : Electronic Codebook (No need for IV)
+        CBC : Cipher Block Chaining (IV required)
+        CFB : Cipher Feedback (IV required)
+        OFB : Output Feedback (IV required)
+        CTR : Counter (IV required)
+
+    mode(boolean):
+        1-Encryption
+        0-Decryption
+
+    return(string):
+        A string as output mode
+        mode == 1 : Encryption result
+        mode == 0 : Decryption result
+        e.g. 0b10010100(bin), 0xABCD01234(hex), sample_text(plain)
+
+    output:
+        Prettified output style(as output_mode)
+*/
+
+    string plain = "0b10101010101010101010101010101010";
+    string key = "password";
+    string IV = "testIV00";
+
+    string cip = block_cipher("bin", plain, "plain", key, "plain", IV, "hex", "CFB", 1);
+
+    string decip = block_cipher("hex", cip, "plain", key, "plain", IV, "bin", "CFB", 0);
+    cout<<decip<<endl;
 }
-//https://www.cnblogs.com/lixiaoxu/articles/7736917.html
